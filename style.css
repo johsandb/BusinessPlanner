@@ -122,4 +122,22 @@ position:absolute;
 
 .left { float: left; }
 .right { float: right; }
-.clear { clear: both; padding: 0 0 10px 0; }
+.clear { clear: both; padding: 0 0 10px 10; }
+
+
+
+
+#footer1 { 
+background: #4D606E;
+color: #fff;
+padding: 10px;
+position:absolute;
+   bottom:-330px;
+   width:100%;
+}
+#footer1 a { color: #fff; text-decoration: none; border-bottom: 1px dotted #fff; }
+#footer1 a:hover { border-bottom: 1px dotted #ccc; }
+
+.left1 { float: left; }
+.right1 { float: right; }
+.clear1 { clear: both; padding: 0 0 10px 10; }

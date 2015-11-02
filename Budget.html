@@ -8,6 +8,259 @@
 <meta name="keywords" content="simple #2, template, simpletemplates.org" />
 <link rel="stylesheet" type="text/css" href="style.css" />
 <title>Business Planner</title>
+<script LANGUAGE="JavaScript">
+<!-- 
+
+
+///////// Math rounding function //////
+// Parameters --
+//   input  -- pass in any number (int,float)
+//   output -- returns a string representing the input
+//             rounded off to 100ths place
+//
+dexpense1 = 0
+dexpense2 = 0
+dexpense3 = 0
+dexpense4 = 0
+drent = 0
+dutils = 0
+dphone = 0
+dboard = 0
+dpers = 0
+dbus = 0
+dcomm = 0
+dcarinsur = 0
+dhthinsur = 0
+ddoctors = 0
+dprescrip = 0
+dlaundry = 0
+ddrugs = 0
+dmovies = 0
+deother = 0
+dunsub = 0
+ddepend = 0
+demerg = 0
+doexp = 0
+gmortgage = 0
+gTotal = 0
+
+function isFieldBlank(theField)
+{
+  if(theField.value.length == 0)
+  {
+   alert("All fields must be completed.")
+   theField.focus()
+   return true
+  }
+  else
+   return false
+}
+
+function moneyFormat(input)
+{
+  var dollars = Math.floor(input)
+  var cents  = "" + Math.round(input * 100)
+  cents = cents.substring(cents.length-2, cents.length)
+  if (cents == "0")
+  {
+    input = dollars + ".00"
+  }
+  else
+  {
+    input = dollars + "." + cents
+  }
+  return input
+}
+
+function balanceFormat(input)
+{
+  var dollars = 0
+  var cents = 0
+  if (input < 0)
+  {
+    dollars = Math.ceil(input)
+  }
+  else
+ {
+   dollars = Math.floor(input)
+ }
+ cents  = "" + Math.round(input * 100)
+ cents = cents.substring(cents.length-2, cents.length)
+ if ((input < 0) && (input > -1) && (cents == "0"))
+ {
+   input = "-" + dollars + ".00"
+ }
+ else if ((input < 0) && (input > -1) && (cents != "0"))
+ {
+   input = "-" + dollars + "." + cents
+ }
+ else if ((input >=0) || (input < -1))
+ {
+   if (cents == "0")
+   {
+     input = dollars + ".00"
+   }
+   else
+   {
+     input = dollars + "." + cents
+   }
+ }
+ return input
+}
+
+function checkNumber(input, msg)
+{
+  msg = msg + " field has invalid data: " + input.value;
+  var str = input.value;
+  for (var i = 0; i < str.length; i++)
+  {
+   var ch = str.substring(i, i + 1)
+   if ((ch < "0" || "9" < ch) && ch != '.') 
+   {
+     alert(msg);
+     input.focus()
+     return false;
+   }
+  }
+  input.value = str;
+  return true;
+}
+
+function processCalc(form)
+{
+// Validate Input
+ if ((isFieldBlank(form.mortgage) == true) || (isFieldBlank(form.rent) == true) ||
+ (isFieldBlank(form.utilities) == true) || (isFieldBlank(form.credit) == true) ||
+ (isFieldBlank(form.loans) == true) || (isFieldBlank(form.insurance) == true) ||
+ (isFieldBlank(form.car) == true) || (isFieldBlank(form.living) == true) ||
+ (isFieldBlank(form.entertainment) == true) || (isFieldBlank(form.education) == true) ||
+ (isFieldBlank(form.othexp) == true) || (isFieldBlank(form.salary) == true) ||
+ (isFieldBlank(form.benefit) == true) || (isFieldBlank(form.pension) == true) ||
+ (isFieldBlank(form.interest) == true) || (isFieldBlank(form.annuity) == true) ||
+ (isFieldBlank(form.othinc) == true))
+ return false
+
+ if ((!checkNumber(form.mortgage, "Mortgage")) || (!checkNumber(form.rent, "Rent")) ||
+ (!checkNumber(form.utilities, "Utilities")) || (!checkNumber(form.credit, "Credit Cards")) ||
+ (!checkNumber(form.loans, "Loans")) || (!checkNumber(form.insurance, "Insurance Policies")) ||
+ (!checkNumber(form.car, "Car Expenses")) || (!checkNumber(form.living, "Living Expenses")) ||
+ (!checkNumber(form.entertainment, "Entertainment")) || (!checkNumber(form.education, "Education Expenses")) ||
+ (!checkNumber(form.othexp, "Other Expenses")) || (!checkNumber(form.salary, "Salary")) ||
+ (!checkNumber(form.benefit, "Benefit")) || (!checkNumber(form.pension, "Pension")) ||
+ (!checkNumber(form.interest, "Interest")) || (!checkNumber(form.annuity, "Annuity")) ||
+ (!checkNumber(form.othinc, "Other Income")))
+ return false
+
+// Get Input values
+ gmortgage = parseFloat(form.mortgage.value)
+ grent = parseFloat(form.rent.value)
+ gutilities = parseFloat(form.utilities.value)
+ gcredit = parseFloat(form.credit.value)
+ gloans = parseFloat(form.loans.value)
+ ginsurance = parseFloat(form.insurance.value)
+ gcar = parseFloat(form.car.value)
+ gliving = parseFloat(form.living.value)
+ gothexp = parseFloat(form.othexp.value)
+ gsalary = parseFloat(form.salary.value)
+ gbenefit = parseFloat(form.benefit.value)
+ gpension = parseFloat(form.pension.value)
+ ginterest = parseFloat(form.interest.value)
+ gentertainment = parseFloat(form.entertainment.value)
+ geducation = parseFloat(form.education.value)
+ gannuity = parseFloat(form.annuity.value)
+ gothinc = parseFloat(form.othinc.value)
+
+ dtotexp  = gmortgage + grent + gutilities + gcredit + gloans + ginsurance + gcar
+ + gliving + gentertainment + geducation + gothexp
+
+ dtotinc =  gsalary + gbenefit + gpension + ginterest + gannuity + gothinc
+
+ gmortgage = moneyFormat(gmortgage)
+ grent = moneyFormat(grent)
+ gutilities = moneyFormat(gutilities)
+ gcredit = moneyFormat(gcredit)
+ gloans = moneyFormat(gloans)
+ ginsurance = moneyFormat(ginsurance)
+ gcar = moneyFormat(gcar)
+ gliving = moneyFormat(gliving)
+ gentertainment = moneyFormat(gentertainment)
+ geducation = moneyFormat(geducation)
+ gothexp = moneyFormat(gothexp)
+ gsalary = moneyFormat(gsalary)
+ gbenefit = moneyFormat(gbenefit)
+ gpension = moneyFormat(gpension)
+ ginterest = moneyFormat(ginterest)
+ gannuity = moneyFormat(gannuity)
+ gothinc = moneyFormat(gothinc)
+ dtotexp = moneyFormat(dtotexp)
+ dtotinc = moneyFormat(dtotinc)
+ dbalance = dtotinc - dtotexp
+ dbalance = balanceFormat(dbalance)
+
+ form.totinc.value = dtotinc
+ form.totexp.value = dtotexp
+ form.mortgage.value = gmortgage
+ form.rent.value = grent
+ form.utilities.value = gutilities
+ form.credit.value = gcredit
+ form.loans.value = gloans
+ form.insurance.value = ginsurance
+ form.car.value = gcar
+ form.living.value = gliving
+ form.entertainment.value = gentertainment
+ form.education.value = geducation
+ form.othexp.value = gothexp
+ form.salary.value = gsalary
+ form.benefit.value = gbenefit
+ form.pension.value = gpension
+ form.interest.value = ginterest
+ form.annuity.value = gannuity
+ form.othinc.value = gothinc
+ form.balance.value = dbalance
+ form.balance.focus()
+ return true
+}
+
+function clearForm(form)
+{
+ form.totinc.value = ""
+ form.totexp.value = ""
+ form.mortgage.value = "0.00"
+ form.rent.value = "0.00"
+ form.utilities.value = "0.00"
+ form.credit.value = "0.00"
+ form.loans.value = "0.00"
+ form.insurance.value = "0.00"
+ form.car.value = "0.00"
+ form.living.value = "0.00"
+ form.entertainment.value = "0.00"
+ form.education.value = "0.00"
+ form.othexp.value = "0.00"
+ form.salary.value = "0.00"
+ form.benefit.value = "0.00"
+ form.pension.value = "0.00"
+ form.interest.value = "0.00"
+ form.annuity.value = "0.00"
+ form.othinc.value = "0.00"
+ form.balance.value = ""
+}
+
+function educfocus()
+{
+  document.budget.mortgage.focus()
+}
+
+function test(who,category,title)
+{
+  who = window.open(category + ".htm", "title", "scrollbars=no,width=250,toolbars=no,height=250")
+  who.creator = window
+}
+
+function emulate()
+{
+}
+// -->
+</script>
 </head>
 <body>
 
@@ -33,9 +286,92 @@
 
 <div class="cright">
 
-<h2>budget</h2>
-
-<p>Test</p>
+<h2>budget Planner</h2>
+    
+    <form name="budget">
+      <div align="left"><table border="0" cellspacing="0" width="470" bgcolor="#F6F6F6" cellpadding="5">
+        <tr>
+          <th bgcolor="#3366CC"><font color="#FFFFFF">INCOME</font></th>
+          <th bgcolor="#3366CC"><font color="#FFFFFF">EXPENDITURE</font></th>
+        </tr>
+        <tr>
+          <td align="left">&nbsp;</td>
+          <td align="left"><font color="#FFFFFF" size="3"><strong>&nbsp; </strong></font></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Salary after tax: $ <input type="text" name="salary" value="0" size="10"></td>
+          <td align="right" nowrap>Mortgages: $<input type="text" name="mortgage" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Government Benefits: $<input type="text" name="benefit" value="0" size="10"></td>
+          <td align="right" nowrap>Rent: $<input type="text" name="rent" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Super./Pension: $<input type="text" name="pension" value="0" size="10"></td>
+          <td align="right" nowrap>Utilities: $<input type="text" name="utilities" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Interest/Dividends: $<input type="text" name="interest" value="0" size="10"></td>
+          <td align="right" nowrap>Credit Cards: $<input type="text" name="credit" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Annuities: $<input type="text" name="annuity" value="0" size="10"></td>
+          <td align="right" nowrap>Loans: $<input type="text" name="loans" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right" nowrap>Other Income: $<input type="text" name="othinc" value="0" size="10"></td>
+          <td align="right" nowrap>Insurance Policies: $<input type="text" name="insurance" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right" nowrap>Car Expenses: $<input type="text" name="car" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right" nowrap>Living Expenses: $<input type="text" name="living" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right" nowrap>Entertainment: $<input type="text" name="entertainment" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right" nowrap>Education Expenses: $<input type="text" name="education" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right" nowrap>Other Expenses: $<input type="text" name="othexp" value="0" size="10"></td>
+        </tr>
+        <tr>
+          <td align="center" colspan="2"><br>
+          <input type="button" value="   Calculate   " onClick="processCalc(this.form)"> <input type="button" value="      Reset      " onClick="clearForm(this.form)"><br>
+            &nbsp;</td>
+        </tr>
+        <tr>
+          <th align="left" bgcolor="#3366CC"><font color="#FFFFFF">RESULT</font></th>
+          <td align="right" bgcolor="#3366CC">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="right">&nbsp;</td>
+          <td align="right">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="right" nowrap><strong><font size="3">Total
+          Income: $<input type="text" name="totinc" size="10"></font></strong></td>
+          <td align="right" nowrap><strong><font size="3">Total
+          Expenditure: $<input type="text" name="totexp" size="10"></font></strong></td>
+        </tr>
+        <tr>
+          <td align="center" colspan="2">&nbsp;<br>
+            <big><strong>YOUR SURPLUS IS: $</strong></big><input type="text" name="balance" size="10"><font color="#FF0000"><br>
+            &nbsp;</font> </td>
+        </tr>
+        <tr>
+        </tr>
+      </table>
+      </div>
+    </form>
+ <p>
 
 <div class="clear"> </div>
 
@@ -59,18 +395,18 @@
 
 </div>
 
-<div id="footer">
+<div id="footer1">
 
-<div class="left">
+<div class="left"1>
 Copyright &copy; Year by <a href="#">Business Planner</a>
 </div>
 
-<div class="right"> 
+<div class="right1"> 
 
  <a href="#">Terms of service</a>
 </div>
 
-<div class="clear"> </div>
+<div class="clear1"> </div>
 
 </div>
 
