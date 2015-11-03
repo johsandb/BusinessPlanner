@@ -7,6 +7,7 @@
 <meta name="description" content="Simple Template #2 from simpletemplates.org" />
 <meta name="keywords" content="simple #2, template, simpletemplates.org" />
 <link rel="stylesheet" type="text/css" href="style.css" />
+<script src="ChartJS/Chart.js"></script>
 <title>Business Planner</title>
 <script LANGUAGE="JavaScript">
 <!-- 
@@ -260,6 +261,7 @@ function emulate()
 {
 }
 // -->
+
 </script>
 </head>
 <body>
@@ -369,11 +371,51 @@ function emulate()
         <tr>
         </tr>
       </table>
+	  
       </div>
     </form>
+	<div id="canvas-holder">
+			<canvas id="chart-area" width="300" height="300"/>
+		</div>
+
+
+	<script>
+
+		var pieData = [
+				{
+					
+					value:30,
+					color:"#F7464A",
+					highlight: "#FF5A5E",
+					label: "Total income"
+				},
+				{
+					value: 10,
+					color: "#46BFBD",
+					highlight: "#5AD3D1",
+					label: "EXPENDITURE"
+				},
+				{
+					value: 70,
+					color: "#FDB45C",
+					highlight: "#FFC870",
+					label: "Your surplus"
+				},
+
+			];
+
+			window.onload = function(){
+				var ctx = document.getElementById("chart-area").getContext("2d");
+				window.myPie = new Chart(ctx).Pie(pieData);
+			};
+
+
+
+	</script>
  <p>
 
 <div class="clear"> </div>
+
 
 
 
