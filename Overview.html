@@ -33,9 +33,108 @@
 
 <div class="cright">
 
+
+
 <h2>Overview</h2>
 
-<p>Text</p>
+</head>
+<body>
+<script>
+
+window.onload = function(){
+
+  var monthChart = new CanvasJS.Chart("monthContainer",
+  {
+    title:{
+      text: "2015",
+      verticalAlign: 'top',
+      horizontalAlign: 'left'
+    },
+                animationEnabled: true,
+                animationDuration: 500,
+
+                data: [{
+                    type: "column",
+                    dataPoints: [
+                    { x: 10, y: 19100, label:"Januar" },
+                    { x: 20, y: 19500, label:"Februar" },
+                    { x: 30, y: 19000, label:"Mars" },
+                    { x: 40, y: 19900, label:"April" },
+                    { x: 50, y: 20300, label:"Mai" },
+                    { x: 60, y: 21100, label:"Juni" },
+                    { x: 70, y: 18600, label:"Juli" },
+                    { x: 80, y: 19300, label:"August" },
+                    { x: 90, y: 19100, label:"September" },
+                    { x: 100, y: 19100, label:"Oktober" },
+                    { x: 110, y: 19100, label:"November" },
+                    { x: 120, y: 0, label:"Desember" }
+                    ]
+                  },
+                  {
+                    type: "column",
+                    dataPoints: [
+                    { x: 10, y: 7100, label:"Januar" },
+                    { x: 20, y: 5500, label:"Februar"},
+                    { x: 30, y: 5000, label:"Mars" },
+                    { x: 40, y: 6500, label:"April" },
+                    { x: 50, y: 9500, label:"Mai" },
+                    { x: 60, y: 6800, label:"Juni" },
+                    { x: 70, y: 2800, label:"Juli" },
+                    { x: 80, y: 3400, label:"August" },
+                    { x: 90, y: 3400, label:"September" },
+                    { x: 100, y: 3400, label:"Oktober" },
+                    { x: 110, y: 7400, label:"November" },
+                    { x: 120, y: 0, label:"Desember"}
+                    ]
+                  }
+                ]
+  });
+
+
+
+
+var catChart = new CanvasJS.Chart("carContainer",
+{
+  title:{
+    text: "Forbruk",
+    verticalAlign: 'top',
+    horizontalAlign: 'left'
+  },
+              animationEnabled: true,
+              animationDuration: 500,
+
+  data: [
+  {
+    type: "doughnut",
+    startAngle:20,
+    toolTipContent: "{label}: {y} - <strong>#percent%</strong>",
+    indexLabel: "{label} #percent%",
+    dataPoints: [
+      {  y: 67, label: "Mat" },
+      {  y: 28, label: "Tøy" },
+      {  y: 10, label: "Telefon" },
+      {  y: 7,  label: "Transport"},
+      {  y: 4,  label: "Diverse"}
+    ]
+  }
+  ]
+});
+catChart.render();
+monthChart.render();
+
+
+
+
+
+}
+
+</script>
+
+
+<script type="text/javascript" src="canvasjs/canvasjs.min.js"></script>
+
+<div id="monthContainer" style="height: 300px; width: 100%;"></div>
+<div id="carContainer" style="height: 300px; width: 100%;"></div>
 
 <div class="clear"> </div>
 
@@ -65,7 +164,7 @@
 Copyright &copy; Year by <a href="#">Business Planner</a>
 </div>
 
-<div class="right"> 
+<div class="right">
 
  <a href="#">Terms of service</a>
 </div>
