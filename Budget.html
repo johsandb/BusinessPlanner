@@ -10,7 +10,7 @@
 <script src="ChartJS/Chart.js"></script>
 <title>Business Planner</title>
 <script LANGUAGE="JavaScript">
-<!-- 
+<!--
 
 
 ///////// Math rounding function //////
@@ -116,7 +116,7 @@ function checkNumber(input, msg)
   for (var i = 0; i < str.length; i++)
   {
    var ch = str.substring(i, i + 1)
-   if ((ch < "0" || "9" < ch) && ch != '.') 
+   if ((ch < "0" || "9" < ch) && ch != '.')
    {
      alert(msg);
      input.focus()
@@ -171,10 +171,10 @@ function processCalc(form)
  gannuity = parseFloat(form.annuity.value)
  gothinc = parseFloat(form.othinc.value)
 
- dtotexp  = gmortgage + grent + gutilities + gcredit + gloans + ginsurance + gcar
+ var dtotexp  = gmortgage + grent + gutilities + gcredit + gloans + ginsurance + gcar
  + gliving + gentertainment + geducation + gothexp
 
- dtotinc =  gsalary + gbenefit + gpension + ginterest + gannuity + gothinc
+ var dtotinc =  gsalary + gbenefit + gpension + ginterest + gannuity + gothinc
 
  gmortgage = moneyFormat(gmortgage)
  grent = moneyFormat(grent)
@@ -200,6 +200,7 @@ function processCalc(form)
 
  form.totinc.value = dtotinc
  form.totexp.value = dtotexp
+
  form.mortgage.value = gmortgage
  form.rent.value = grent
  form.utilities.value = gutilities
@@ -218,7 +219,32 @@ function processCalc(form)
  form.annuity.value = gannuity
  form.othinc.value = gothinc
  form.balance.value = dbalance
+
+
+ var pieData = [
+     {
+
+       value:dtotexp,
+       color:"#F7464A",
+       highlight: "#FF5A5E",
+       label: "Total income"
+     },
+     {
+       value: dtotinc,
+       color: "#46BFBD",
+       highlight: "#5AD3D1",
+       label: "EXPENDITURE"
+     },
+
+
+   ];
+
+   var ctx = document.getElementById("chart-area").getContext("2d");
+   window.myPie = new Chart(ctx).Pie(pieData);
+
  form.balance.focus()
+
+
  return true
 }
 
@@ -244,6 +270,11 @@ function clearForm(form)
  form.annuity.value = "0.00"
  form.othinc.value = "0.00"
  form.balance.value = ""
+
+
+     var ctx = document.getElementById("chart-area").getContext("2d");
+     window.myPie = new Chart(ctx).Pie(null);
+
 }
 
 function educfocus()
@@ -260,6 +291,12 @@ function test(who,category,title)
 function emulate()
 {
 }
+
+
+
+
+
+
 // -->
 
 </script>
@@ -289,7 +326,7 @@ function emulate()
 <div class="cright">
 
 <h2>budget Planner</h2>
-    
+
     <form name="budget">
       <div align="left"><table border="0" cellspacing="0" width="470" bgcolor="#F6F6F6" cellpadding="5">
         <tr>
@@ -346,7 +383,7 @@ function emulate()
         </tr>
         <tr>
           <td align="center" colspan="2"><br>
-          <input type="button" value="   Calculate   " onClick="processCalc(this.form)"> <input type="button" value="      Reset      " onClick="clearForm(this.form)"><br>
+          <input type="button" value="   Calculate   " onClick="processCalc(this.form)"> <input type="button" value="     Reset    " onClick="clearForm(this.form)"><br>
             &nbsp;</td>
         </tr>
         <tr>
@@ -371,7 +408,7 @@ function emulate()
         <tr>
         </tr>
       </table>
-	  
+
       </div>
     </form>
 	<div id="canvas-holder">
@@ -379,39 +416,6 @@ function emulate()
 		</div>
 
 
-	<script>
-
-		var pieData = [
-				{
-					
-					value:30,
-					color:"#F7464A",
-					highlight: "#FF5A5E",
-					label: "Total income"
-				},
-				{
-					value: 10,
-					color: "#46BFBD",
-					highlight: "#5AD3D1",
-					label: "EXPENDITURE"
-				},
-				{
-					value: 70,
-					color: "#FDB45C",
-					highlight: "#FFC870",
-					label: "Your surplus"
-				},
-
-			];
-
-			window.onload = function(){
-				var ctx = document.getElementById("chart-area").getContext("2d");
-				window.myPie = new Chart(ctx).Pie(pieData);
-			};
-
-
-
-	</script>
  <p>
 
 <div class="clear"> </div>
@@ -443,7 +447,7 @@ function emulate()
 Copyright &copy; Year by <a href="#">Business Planner</a>
 </div>
 
-<div class="right1"> 
+<div class="right1">
 
  <a href="#">Terms of service</a>
 </div>
